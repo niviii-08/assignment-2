@@ -34,6 +34,8 @@ export default function Home() {
         <Link href="/contact" style={styles.link}>CONTACT</Link>
         <br />
         <Link href="/about" style={styles.link}>ABOUT</Link>
+        <br />
+        <Link href="/feedback" style={styles.link}>FEEDBACK</Link>
       </main>
     </div>
   );
