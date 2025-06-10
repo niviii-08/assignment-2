@@ -1,13 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Import useEffect
 import FeedbackList from './components/FeedbackList'; // Adjust path if necessary
 
 export default function About() {
-  const [feedbackItems, setFeedbackItems] = useState([
-    "Great chatbot, very helpful!",
-    "Easy to use interface.",
-    "Could use more features, but good start."
-  ]);
+  // Initialize feedbackItems state from local storage or with default values
+  const [feedbackItems, setFeedbackItems] = useState(() => {
+    try {
+      const storedFeedback = localStorage.getItem('chatbotFeedback');
+      return storedFeedback ? JSON.parse(storedFeedback) : [
+        "Great chatbot, very helpful!",
+        "Easy to use interface.",
+        "Could use more features, but good start."
+      ];
+    } catch (error) {
+      console.error("Failed to load feedback from local storage:", error);
+      return [
+        "Great chatbot, very helpful!",
+        "Easy to use interface.",
+        "Could use more features, but good start."
+      ];
+    }
+  });
+
   const [newFeedback, setNewFeedback] = useState('');
+
+  // useEffect to save feedbackItems to local storage whenever it changes
+  useEffect(() => {
+    try {
+      localStorage.setItem('chatbotFeedback', JSON.stringify(feedbackItems));
+    } catch (error) {
+      console.error("Failed to save feedback to local storage:", error);
+    }
+  }, [feedbackItems]); // Dependency array: run this effect whenever feedbackItems changes
 
   const handleAddFeedback = () => {
     if (newFeedback.trim()) {
