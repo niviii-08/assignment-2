@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'; // Import useEffect
-import FeedbackList from './components/FeedbackList'; // Adjust path if necessary
+import FeedbackList from '../components/FeedbackList';// Adjust path if necessary
 
 export default function About() {
   // Initialize feedbackItems state from local storage or with default values
